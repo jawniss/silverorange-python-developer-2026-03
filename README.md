@@ -29,7 +29,7 @@ posts that are provided:
 
 ## Environment
 
-The application uses Django 6.x and Python 3.14. The Python version is managed
+The application uses Django 6.x and Python 3.12. The Python version is managed
 using uv.
 
 ## Coding Standard
