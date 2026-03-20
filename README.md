@@ -18,12 +18,12 @@ posts that are provided:
 1.  Write an importer in Python that imports a list of post and author files
     (examples are provided in the `data` folder) into the SQLite database
     configured in the project.
-2.  Update the post details controller to load a published post from the 
+1.  Update the post details controller to load a published post from the
     database with the specified id. Update the post details template to render
-    the post content (title, body, author) as HTML. _The post body is 
+    the post content (title, body, author) as HTML. _The post body is
     formatted as Markdown and the HTML should include the formatted Markdown_.
-3.  Update the post index controller to load all published posts from the 
-    database in reverse chronological order. Update the post index template to 
+1.  Update the post index controller to load all published posts from the
+    database in reverse chronological order. Update the post index template to
     render ths list as HTML. Include the post titles and authors in the output.
     Make clicking a post go to the post details.
 
@@ -40,6 +40,13 @@ is configured in the project and may be used to format and lint your code:
 ```sh
 uv run ruff check --fix .
 uv run ruff format .
+```
+
+Django templates can be checked and formatted using djLint:
+
+```sh
+uv run djlint . --lint
+uv run djlint . --reformat
 ```
 
 ## Dependencies
