@@ -1,99 +1,113 @@
 # silverorange Python Developer Assessment
 
+## Introduction
+
 This exercise is designed to assess how you approach tasks required in your
 position as Python developer at silverorange. We are interested to see how you
 work as well, as what your final results are; include useful Git commit
 messages and comments where you think your code may be unclear.
 
+If you have any questions about the exercise, please reach out to us!
+
 Please do not include your name or any other self-identifying information in
 code or commit messages as silverorange will anonymize your work before
 reviewing.
 
-## Tasks
+## Project Setup
 
-Using the provided Django framework, and data fixtures for authors and
-posts that are provided:
-
-1.  Create models for posts and authors in the blog app based on the data in
-    JSON files.
-1.  Write an importer in Python that imports post and author files
-    (examples are provided in the `data` folder) into the SQLite database
-    configured in the project.
-1.  Update the post detail view to load a published post from the
-    database with the specified id. Update the post detail template to render
-    the post content (title, body, author) as HTML. _The post body is
-    formatted as Markdown and the HTML should include the formatted Markdown_.
-1.  Update the post index view to load all published posts from the
-    database in reverse chronological order. Update the post index template to
-    render ths list as HTML. Include the post titles and authors in the output.
-    Make clicking a post go to the post details.
-
-## Environment
-
-The application uses Django 6.x and Python 3.12. The Python version is managed
-using uv.
-
-## Coding Standard
-
-Please use Python type hints for your code. [Ruff](https://docs.astral.sh/ruff/)
-is configured in the project and may be used to format and lint your code:
+This project uses **uv** to manage Python dependencies and Python versions. You
+will need [uv installed](https://docs.astral.sh/uv/getting-started/installation/)
+to initialize and run the project. If you are using macOS you can install uv
+using Homebrew:
 
 ```sh
-uv run ruff check --fix .
-uv run ruff format .
+brew install uv
 ```
 
-Django templates can be checked and formatted using djLint:
+Once uv is installed, you can sync and migrate the included Django project:
 
 ```sh
-uv run djlint . --lint
-uv run djlint . --reformat
-```
-
-All linting can be checked with:
-
-```sh
-make lint-check
-make lint-fix
-```
-
-## Dependencies
-
-Please use the [uv](https://docs.astral.sh/uv/) tool for dependency
-management. You can use any 3rd-party libraries as necessary or as desired in
-order to achieve the tasks. Uv can be installed in a variety of ways including
-using Brew on macOS.
-
-## Commits
-
-Your commit history is important to us! Try to make meaningful commit messages
-that show your progress. **Remember to not include your name or any other
-self-identifying information in your commit messages.**
-
-## Getting Started with the Django Application
-
-Provided is a basic Django application with [esbuild](https://esbuild.github.io/)
-for compiling CSS assets. To install the required dependencies:
-
-```sh
-# Django toolchain
 uv sync
-# esbuild toolchain
+uv run python manage.py migrate
+```
+
+Client-side assets are managed using [esbuild](https://esbuild.github.io/).
+This toolchain is managed using NPM. NPM is bundled with Node.js, which can
+also be installed using Homebrew:
+
+```sh
+brew install node
+```
+
+Once NPM is available, install dependencies using NPM:
+
+```sh
 npm install
 ```
 
-You can then start a development server for Django and esbuild by running the
-command:
+With dependencies installed, you can run the project using the following
+command. This will run the Django development server as well as an esbuild file
+watcher:
 
 ```sh
 make dev
 ```
 
-You can then access the application on port 8000. The following links can be
-used to test:
+With the development server running, you can access the application on port 8000. The following links can be used to test:
 
 - http://localhost:8000 - this will verify the application is running.
 - http://localhost:8000/posts - the posts index page.
 - http://localhost:8000/posts/6ec246b1-ad09-4e03-8573-21e2e779856c - this
   should load a post once the posts are imported and the application is updated.
 - http://localhost:8000/asdfghjk - this should show a not-found page.
+
+## Tasks
+
+Using the provided Django project, and provided data fixtures for authors and
+posts:
+
+1.  Create models for _posts_ and _authors_ in the blog app based on the data in
+    JSON files.
+1.  Write an importer in Python that imports post and author data files from the
+    `data` into the SQLite database configured in the Django project.
+1.  Update the post index view to load all published posts from the
+    database in reverse chronological order. Update the post index template to
+    render this list as HTML. Include the post titles and authors in the output.
+    Make clicking a post go to the post details.
+1.  Add a post detail route to the blog app that will load a published post
+    from the database from the id in the URL.
+    - the post detail URL path should be of the form `posts/[id]`
+    - the post detail view and template should render the post content (title,
+      body, author) as HTML.
+    - _the post body is
+      formatted as Markdown and the HTML should include the formatted Markdown_.
+    - if the requested post is unavailable, show a 404 page.
+
+## Success Criteria
+
+We will evaluate your anonymized implementation based on the following criteria:
+
+- Modern Python best practices
+- Code legibility
+- Correctness of task implementation
+- Use of provided tools
+- Error handling and security
+- Testability of implementation and/or testing
+
+## Coding Standard
+
+Please use Python type hints for your code. [Ruff](https://docs.astral.sh/ruff/)
+is configured in the project and may be used to format and check your code.
+Django templates can be checked and formatted using djLint. Both tools can
+be called using Makefile targets:
+
+```sh
+make lint-check
+make lint-fix
+```
+
+## Commits
+
+Your commit history is important to us! Try to make meaningful commit messages
+that show your progress. **Remember to not include your name or any other
+self-identifying information in your commit messages.**
