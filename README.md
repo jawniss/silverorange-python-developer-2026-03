@@ -1,3 +1,5 @@
+TODO: Reformat this README
+
 I understand the repos are to be anonymized, and I tried to stay true to that. However, there are following details about my setup/environment that I include that impacted my experience completing this exercise that I thought were important (or at least interesting!) to share. This theoretically shouldn't impact the anonymization, but I wanted to add this note anyways.
 
 There may also be present/past tense inconsistencies, I'm also using this as my live notes page. For all I know you guys don't even look at this, but at least I have it for my own sake!
@@ -43,11 +45,18 @@ Strange behaviour:
 .gitignore
 - My package-lock.json for my dependencies is not in the default gitignore, I'm deciding to not touch the gitignore and leave it default.
 
+Design choices:
+- Throughout the files I note my design choices
+
 
 Checklist
 1. Create models for posts and authors in the blog app based on the data in JSON files.
+> Done
 
 2. Write an importer in Python that imports post and author data files from the data into the SQLite database configured in the Django project.
+> Going to make in the main directory
+> Wording doesn't say has to go through as a Django model, can I just load the JSONs directly to the SQLite DB?
+> I'm going to store everything in the sqlite3 DB as text for now, then convert when retrieving
 
 3. Update the post index view to load all published posts from the database in reverse chronological order.
 - Update the template to render this list as HTML.
