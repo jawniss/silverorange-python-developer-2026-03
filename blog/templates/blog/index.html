@@ -16,7 +16,10 @@
       <!-- posts is the data from views.py, like in cherrypy -->
       {% for post in posts %}
         <tr>
-            <td>{{ post.title }}</td>
+            <!-- <td>{{ post.title }}</td> -->
+            <td> 
+              <a href="{% url 'detail' post.id %}">{{ post.title }}</a> 
+            </td>
             <td>{{ post.author.full_name }}</td>
             <td>{{ post.published_at }}</td>
         </tr>
