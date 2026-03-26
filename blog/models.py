@@ -18,7 +18,7 @@ Would want the created and modified ats to be converted to timestamps
 # Timestamp includes timezone info
 # in settings.py > USE_TZ = True
 # Wary about default behaviour of "default", looks like here we're taking in the authors JSON as already made UUIDs and timestamps so wary if these would conflict
-class Author(models.Model):
+class Authors(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # Size 255 seems excessive, but rather that than run into too long name errors for now
     full_name = models.CharField(max_length=255)
@@ -37,4 +37,4 @@ class Posts(models.Model):
     # Not sure if all entries have been published, so allow it to be nullable
     published_at = models.DateTimeField(null=True, blank=True)
     # TODO: Not 100% sure of cascade deletion behaviour, double check Django implementation only deletes the Post
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
