@@ -27,6 +27,9 @@ class Authors(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        db_table = "authors"
+
 
 class Posts(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -37,4 +40,13 @@ class Posts(models.Model):
     # Not sure if all entries have been published, so allow it to be nullable
     published_at = models.DateTimeField(null=True, blank=True)
     # TODO: Not 100% sure of cascade deletion behaviour, double check Django implementation only deletes the Post
-    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
+    # Needed to add db_column="author" because Django kept looking for "author_id"
+    author = models.ForeignKey(
+        Authors, 
+        on_delete=models.CASCADE,
+        db_column="author"
+    )
+
+    # Without this, Django looks for table blog_posts because of directory chain
+    class Meta:
+        db_table = "posts"

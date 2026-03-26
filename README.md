@@ -57,6 +57,7 @@ Checklist
 > Going to make in the main directory
 > Wording doesn't say has to go through as a Django model, can I just load the JSONs directly to the SQLite DB?
 > I'm going to store everything in the sqlite3 DB as text for now, then convert when retrieving
+> Done
 
 3. Update the post index view to load all published posts from the database in reverse chronological order.
 - Update the template to render this list as HTML.
@@ -73,3 +74,8 @@ Checklist
 - Use modern CSS best practices.
 - If you know SCSS you may use SCSS features where appropriate, but they are not required.
 - No designs are provided. Do your best to make these basic pages visually appealing.
+
+Final thoughts
+If anyone reads this I'm pleasantly surprised! This was extremely fun to complete, as this is my first time using Django and even sqlite3. To stay anonymous best I can, I use a different Python library for web dev and use a server based SQL db, so it was so fun learning Django and SQLite 3 whilst doing this exercise. I definitely will use these technologies for some web app ideas I have!
+
+Thank you so much for this opportunity! I'm extremely grateful :)
