@@ -6,7 +6,7 @@ from blog.models import Posts
 
 def index(request: HttpRequest) -> HttpResponse:
     # posts = Posts.objects.all().order_by('-published_at')
-    posts = Posts.objects.select_related("author").all()
+    posts = Posts.objects.select_related("author").order_by("-published_at")
 
     context = {
         "posts": posts
