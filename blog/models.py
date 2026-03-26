@@ -2,25 +2,27 @@ from django.db import models  # noqa: F401
 import uuid
 
 # Create your models here.
-"""
-Authors JSON structure: 
-{
-    id: UUID, 
-    full_name: str,
-    created_at: timestamp,
-    modified_at: timestamp
-}
-Would want the created and modified ats to be converted to timestamps
-"""
 
-# Looks like django models is like a dict object
+# AI helped create this model field for keeping the hyphens in the UUID for accessing post details pages
+# I was getting errors with the models.UUIDField as when Django searched for the post UUID in the DB, it would stop at the first hyphen on the search.
+# Ex: f30b0c7f-e615-4917-98fe-f4f90d74fffc
+# Django searches for: f30b0c7f
+# Returns no post, as it doesn't match
+# I wanted to keep the data in the JSONs exactly as they are in the JSONs; removing the hyphens before inserting into the DB works, but again, I wanted to insert it all as is
+class HyphenatedUUIDField(models.UUIDField):
+    def get_db_prep_value(self, value, connection, prepared=False):
+        if value is None:
+            return None
+        if isinstance(value, uuid.UUID):
+            return str(value)
+        return str(uuid.UUID(value))
 
 # Timestamp includes timezone info
 # in settings.py > USE_TZ = True
 # Wary about default behaviour of "default", looks like here we're taking in the authors JSON as already made UUIDs and timestamps so wary if these would conflict
 class Authors(models.Model):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    id = models.CharField(primary_key=True, max_length=36, editable=False)
+    id = HyphenatedUUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.CharField(primary_key=True, max_length=36, editable=False)
     # Size 255 seems excessive, but rather that than run into too long name errors for now
     full_name = models.CharField(max_length=255)
     # As above comment, if auto generating the timestamps on creation, keep True. If importing data, may need it as False
@@ -33,8 +35,8 @@ class Authors(models.Model):
 
 
 class Posts(models.Model):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    id = models.CharField(primary_key=True, max_length=36, editable=False)
+    id = HyphenatedUUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.CharField(primary_key=True, max_length=36, editable=False)
     title = models.CharField(max_length=255)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,6 +51,6 @@ class Posts(models.Model):
         db_column="author"
     )
 
-    # Without this, Django looks for table blog_posts because of directory chain
+    # Without this, Django looks for table "blog_posts" because of directory chain
     class Meta:
         db_table = "posts"

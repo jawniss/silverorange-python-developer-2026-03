@@ -45,10 +45,6 @@ Strange behaviour:
 .gitignore
 - My package-lock.json for my dependencies is not in the default gitignore, I'm deciding to not touch the gitignore and leave it default.
 
-Design choices:
-- Throughout the files I note my design choices
-
-
 Checklist
 1. Create models for posts and authors in the blog app based on the data in JSON files.
 > Done
@@ -75,6 +71,7 @@ Checklist
 - Use modern CSS best practices.
 - If you know SCSS you may use SCSS features where appropriate, but they are not required.
 - No designs are provided. Do your best to make these basic pages visually appealing.
+> Done
 
 Final thoughts
 If anyone reads this I'm pleasantly surprised! This was extremely fun to complete, as this is my first time using Django and even sqlite3. To stay anonymous best I can, I use a different Python library for web dev and use a server based SQL db, so it was so fun learning Django and SQLite 3 whilst doing this exercise. I definitely will use these technologies for some web app ideas I have!
