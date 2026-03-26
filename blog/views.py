@@ -13,9 +13,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "blog/index.html", context)
 
 def detail(request, id):
-    print(id)
     post = get_object_or_404(Posts.objects.select_related('author'), id=id)
-    print("post: ", post)
     return render(request, 'blog/detail.html', {'post': post})
 
 def welcome(request: HttpRequest) -> HttpResponse:
