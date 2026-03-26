@@ -1,7 +1,8 @@
-from django.db import models  # noqa: F401
 import uuid
 
-# Create your models here.
+from django.db import models  # noqa: F401
+from django.db.backends.base.base import BaseDatabaseWrapper
+
 
 # AI helped create this model field for keeping the hyphens in the UUID for accessing post details pages
 # I was getting errors with the models.UUIDField as when Django searched for the post UUID in the DB, it would stop at the first hyphen on the search.
@@ -10,7 +11,12 @@ import uuid
 # Returns no post, as it doesn't match
 # I wanted to keep the data in the JSONs exactly as they are in the JSONs; removing the hyphens before inserting into the DB works, but again, I wanted to insert it all as is
 class HyphenatedUUIDField(models.UUIDField):
-    def get_db_prep_value(self, value, connection, prepared=False):
+    def get_db_prep_value(
+            self, 
+            value: uuid.UUID,
+            connection: BaseDatabaseWrapper, 
+            prepared: bool=False
+        ) -> str:
         if value is None:
             return None
         if isinstance(value, uuid.UUID):
