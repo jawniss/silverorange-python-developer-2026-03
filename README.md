@@ -66,6 +66,7 @@ Checklist
 
 4. Add a post detail route to the blog app that will load a published post from the database from the id in the URL.
 - The URL path should be of the form posts/[id].
+> The post ids are stored as UUID in the DB, so I kept it as UUID
 - The view and template should render the post content (title, body, author) as HTML.
 - If the requested post is unavailable, show a 404 page.
 - The post body is formatted as Markdown and the HTML should include the formatted Markdown.

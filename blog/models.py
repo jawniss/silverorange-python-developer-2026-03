@@ -19,7 +19,8 @@ Would want the created and modified ats to be converted to timestamps
 # in settings.py > USE_TZ = True
 # Wary about default behaviour of "default", looks like here we're taking in the authors JSON as already made UUIDs and timestamps so wary if these would conflict
 class Authors(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(primary_key=True, max_length=36, editable=False)
     # Size 255 seems excessive, but rather that than run into too long name errors for now
     full_name = models.CharField(max_length=255)
     # As above comment, if auto generating the timestamps on creation, keep True. If importing data, may need it as False
@@ -32,7 +33,8 @@ class Authors(models.Model):
 
 
 class Posts(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(primary_key=True, max_length=36, editable=False)
     title = models.CharField(max_length=255)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
