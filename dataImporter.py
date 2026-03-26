@@ -1,43 +1,9 @@
-import os
-import django
 import json
 import sqlite3
-
 from pathlib import Path
-
-# from blog.models import Author
-# from blog.models import Posts
-
-# Configure Django settings
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Silverorange.settings')
-# django.setup()
 
 conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
-
-# Looks like SQLite3 typing is fairly general
-# Design choice: Originally I wanted to make the timestamps Datetime type, but
-#  decided to keep it as strings as the data JSONs are already strings. I'd rather
-#  convert later after retrieving the data
-# cursor.execute("""
-#     CREATE TABLE IF NOT EXISTS authors (
-#         id TEXT,
-#         full_name TEXT,
-#         created_at TEXT,
-#         modified_at TEXT
-#     );
-# """)
-# cursor.execute("""
-#     CREATE TABLE IF NOT EXISTS posts (
-#         id TEXT,
-#         title TEXT,
-#         body TEXT,
-#         created_at TEXT,
-#         modified_at TEXT,
-#         published_at TEXT,
-#         author TEXT
-#     );
-# """)
 
 authorsColumns = [
     "id",
@@ -59,21 +25,16 @@ postsColumns = [
 authorsDataPath = Path("data/authors")
 postsDataPath = Path("data/posts")
 
-from datetime import datetime, timezone
-
 # Stretch goal: these processes are very similar for the authors and posts, make it a function and pass in args
 # Assuming for now these are only run once, otherwise data would repeat
-cursor.execute("DELETE FROM authors; DELETE FROM posts")
+cursor.execute("DELETE FROM authors;")
+cursor.execute("DELETE FROM posts;")
 for fileName in authorsDataPath.iterdir():
     if fileName.is_file():
         try:
             with open(fileName, 'r', encoding='utf-8') as file:
                 # Dict class
                 fileData = json.load(file)
-            # If there were multiple JSONs per file, do this
-            # authorsValues = [(row["id"], row["full_name"], row["created_at"], row["modified_at"]) for row in fileData]
-            # print(fileData)
-            # print(fileData["id"])
             # authorsValues = [fileData["id"], fileData["full_name"], fileData["created_at"], fileData["modified_at"]]
             # cursor.execute(f"INSERT INTO authors {authorsColumns} VALUES {authorsValues}")
             # It looks like the timestamps are auto converted from the JSON str to Datetime in the db.sqlite3
