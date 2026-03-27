@@ -24,10 +24,9 @@ Since this is not going back upstream, I didn't add the original test repo as a 
   pip install uv
   ```
 
-  2. 
-    ```sh
+  2.{content: }
     uv sync
-    ```
+    {content: }
     > this creates a .venv
     ```sh
       .\.venv\Scripts\activate
@@ -36,7 +35,8 @@ Since this is not going back upstream, I didn't add the original test repo as a 
     ```sh
     uv run python manage.py migrate
     ```
-  3. ```sh
+  3. 
+  ```sh
   pip install node
   ```
   4. ```sh
