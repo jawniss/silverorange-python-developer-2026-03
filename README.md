@@ -15,45 +15,26 @@ Since this is not going back upstream, I didn't add the original test repo as a 
   My process running this exercise on a Windows environment in VS Code. I included these because from working, I've learned accurate repro steps are extremely important!
 
   My Windows setup process for replication (assuming already in desired directory with my fork pulled)
-  1. Instead of 
-  ```
-  brew install uv
-  ```
-  I ran
-  ```
-  pip install uv
-  ```
+  1. Instead of "brew install uv" I ran
+  `pip install uv`
 
-  2.
+  2. "uv sync" creates a new .venv, then activate it. In the terminal it says "(silverorange-python-exercise)" rather than "(.venv)"
   ```
   uv sync
-  ```
-    > this creates a .venv
-  ```
   .\.venv\Scripts\activate
-  ```
-  > In terminal it says "(silverorange-python-exercise)" rather than "(.venv)"
-  ```
   uv run python manage.py migrate
   ```
-  3. 
-  ```
-  pip install node
-  ```
-  4. 
-  ```
-  npm install
-  ```
+
+  3. `pip install node`
+
+  4. `npm install`
     4.1. Got a "1 high severity vulnerability"
-      "To address all issues, run: 
-      ```
-      npm audit fix
-      ```
+      "To address all issues, run:
+      `npm audit fix`
+
   5. "make" doesn't natively run on Windows: I ran 
-  ```
-  choco install make
-  ```
-    After running, "make dev" works
+    `choco install make`
+    After running, `make dev` works
 
     Verified with the included links on the README that the server was running
 
@@ -67,7 +48,7 @@ Since this is not going back upstream, I didn't add the original test repo as a 
   With the --noreload flag on, I added a line to welcome.html. On first soft refresh it showed, then no further changes showed. Strange
 
   Removed the --noreload flag, seems like the spam CTRL+C method may work even without it if I need to restart the server. Much better without the flag for the speed
-  > Terming the program in terminal, refreshing the pages still shows the Django rather than 404
+  > Terminating the program in terminal, refreshing the pages still shows the Django rather than 404
   > Maybe just Django behaviour?
 
 ### .gitignore
