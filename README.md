@@ -1,4 +1,6 @@
-TODO: Reformat this README
+# silverorange Python Developer Assessment Attempt
+
+## Introduction
 
 I understand the repos are to be anonymized, and I tried to stay true to that. However, there are following details about my setup/environment that I include that impacted my experience completing this exercise that I thought were important (or at least interesting!) to share. This theoretically shouldn't impact the anonymization, but I wanted to add this note anyways.
 
@@ -9,29 +11,53 @@ This is my first time working with Django, and although I have a Mac, I prefer w
 Since this is not going back upstream, I didn't add the original test repo as a git upstream to this fork, otherwise I would on a real project
 
 
-⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+## My process setting up
   My process running this exercise on a Windows environment in VS Code. I included these because from working, I've learned accurate repro steps are extremely important!
 
   My Windows setup process for replication (assuming already in desired directory with my fork pulled)
-  1. Instead of "brew install uv" > "pip install uv"
-  2. "uv sync" > this creates a .venv
-    ".\.venv\Scripts\activate"
+  1. Instead of 
+  ```sh
+  brew install uv
+  ```
+  I ran
+  ```sh
+  pip install uv
+  ```
+
+  2. 
+    ```sh
+    uv sync
+    ```
+    > this creates a .venv
+    ```sh
+      .\.venv\Scripts\activate
+    ```
     > In terminal it says "(silverorange-python-exercise)" rather than "(.venv)"
-    "uv run python manage.py migrate"
-  3. "pip install node"
-  4. "npm install"
+    ```sh
+    uv run python manage.py migrate
+    ```
+  3. ```sh
+  pip install node
+  ```
+  4. ```sh
+  npm install
+  ```
     4.1. Got a "1 high severity vulnerability"
-      "To address all issues, run: npm audit fix"
-      I ran it
-  5. "make" doesn't natively run on Windows: I ran "choco install make"
+      "To address all issues, run: 
+      ```sh
+      npm audit fix
+      ```
+  5. "make" doesn't natively run on Windows: I ran 
+  ```sh
+  choco install make
+  ```
     After running, "make dev" works
 
     Verified with the included links on the README that the server was running
-⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
 
-Notes:
-Strange behaviour:
+## Notes:
+### Strange behaviour:
   Seemingly Django has a child process for running that can't be stopped on Windows reliably - I don't have a BREAK key on my keyboard, and running CTRL+C hangs the process. Even killing my terminal didn't seem to stop the server, as I would hard refresh my localhost:8000 and 8000/posts/ pages and they still showed. Only completely closing my VS Code seems to stop the server, giving me a 404 on the previous mentioned pages.
 
   However, this vastly slows my development having to close and reopen (folders, venvs, etc), so trying AI recommended steps I added the --noreload flag to the Makefile's runserver target > This still hangs, but it seems if I spam CTRL+C after "Y" eventually it silently dies?
@@ -42,10 +68,10 @@ Strange behaviour:
   > Terming the program in terminal, refreshing the pages still shows the Django rather than 404
   > Maybe just Django behaviour?
 
-.gitignore
+### .gitignore
 - My package-lock.json for my dependencies is not in the default gitignore, I'm deciding to not touch the gitignore and leave it default.
 
-Checklist
+## Checklist
 1. Create models for posts and authors in the blog app based on the data in JSON files.
 > Done
 
@@ -73,7 +99,10 @@ Checklist
 - No designs are provided. Do your best to make these basic pages visually appealing.
 > Done
 
-Final thoughts
+## AI usage
+I consulted AI for learning how functions worked, such as the syntax/how functions work in Django, as I previously mentioned this is my first time using Django. I also used AI to troubleshoot when I was having errors, such as diagnosing the UUIDField issue I had in models.py 
+
+## Final thoughts
 If anyone reads this I'm pleasantly surprised! This was extremely fun to complete, as this is my first time using Django and even sqlite3. To stay anonymous best I can, I use a different Python library for web dev and use a server based SQL db, so it was so fun learning Django and SQLite 3 whilst doing this exercise. I definitely will use these technologies for some web app ideas I have!
 
 Thank you so much for this opportunity! I'm extremely grateful :)
