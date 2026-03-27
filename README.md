@@ -16,39 +16,41 @@ Since this is not going back upstream, I didn't add the original test repo as a 
 
   My Windows setup process for replication (assuming already in desired directory with my fork pulled)
   1. Instead of 
-  ```sh
+  ```
   brew install uv
   ```
   I ran
-  ```sh
+  ```
   pip install uv
   ```
 
-  2.{content: }
-    uv sync
-    {content: }
+  2.
+  ```
+  uv sync
+  ```
     > this creates a .venv
-    ```sh
-      .\.venv\Scripts\activate
-    ```
-    > In terminal it says "(silverorange-python-exercise)" rather than "(.venv)"
-    ```sh
-    uv run python manage.py migrate
-    ```
+  ```
+  .\.venv\Scripts\activate
+  ```
+  > In terminal it says "(silverorange-python-exercise)" rather than "(.venv)"
+  ```
+  uv run python manage.py migrate
+  ```
   3. 
-  ```sh
+  ```
   pip install node
   ```
-  4. ```sh
+  4. 
+  ```
   npm install
   ```
     4.1. Got a "1 high severity vulnerability"
       "To address all issues, run: 
-      ```sh
+      ```
       npm audit fix
       ```
   5. "make" doesn't natively run on Windows: I ran 
-  ```sh
+  ```
   choco install make
   ```
     After running, "make dev" works
